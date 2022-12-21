@@ -74,9 +74,9 @@ const OnBoardScreen = () => {
             <Pressable
               style={style.nextBtn}
               onPress={() => {
-                onboardStatus === 2
-                  ? setOnboardStatus(0)
-                  : setOnboardStatus(onboardStatus + 1);
+                // onboardStatus === 2
+                //   ? setOnboardStatus(0)
+                //   : setOnboardStatus(onboardStatus + 1);
               }}
             />
           </Animated.View>
