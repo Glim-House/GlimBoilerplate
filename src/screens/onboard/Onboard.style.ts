@@ -10,7 +10,7 @@ export const style = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     position: 'absolute',
-    bottom: 80,
+    bottom: 60,
     width: width - 64,
     height: height / 3,
     alignSelf: 'center',
@@ -23,6 +23,8 @@ export const style = StyleSheet.create({
     height: 62,
     borderRadius: 100,
     marginBottom: -20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   heading: {
     fontSize: 20,

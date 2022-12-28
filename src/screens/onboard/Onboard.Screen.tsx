@@ -1,12 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {Pressable, Text, View} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {Image, Pressable, Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
 import Animated, {
+  useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import {style} from './Onboard.style';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 
 const OnBoardScreen = () => {
   const onboardData = [
@@ -31,7 +34,10 @@ const OnBoardScreen = () => {
   const bg: {value: string} = useSharedValue(onboardData[onboardStatus].color);
 
   useEffect(() => {
-    bg.value = withTiming(onboardData[onboardStatus].color, {duration: 800});
+    bg.value = withDelay(
+      400,
+      withTiming(onboardData[onboardStatus].color, {duration: 0}),
+    );
     triggerScale.value = false;
     setTimeout(() => {
       triggerScale.value = true;
@@ -61,8 +67,30 @@ const OnBoardScreen = () => {
       backgroundColor: bg.value,
     };
   });
+  const debounceRef = useRef<any>();
+  const changeSheets = () => {
+    if (!debounceRef.current) {
+      onboardStatus === 2
+        ? setOnboardStatus(0)
+        : setOnboardStatus(onboardStatus + 1);
+      debounceRef.current = setInterval(() => {
+        clearInterval(debounceRef.current);
+        debounceRef.current = null;
+      }, 1000);
+    }
+  };
+
+  const eventHandler = useAnimatedGestureHandler({
+    onStart: (event, ctx) => {
+      console.log(event);
+    },
+    onEnd: (event, ctx) => {
+      console.log(event);
+    },
+  });
+
   return (
-    <>
+    <PanGestureHandler onGestureEvent={eventHandler}>
       <Animated.View style={[style.container, onBoardbackground]}>
         <Animated.View style={[sheetStyle]} />
         <View style={style.card}>
@@ -71,18 +99,13 @@ const OnBoardScreen = () => {
           </Text>
           <Text style={style.desc}>{onboardData[onboardStatus].desc}</Text>
           <Animated.View style={[style.btnBox, onBoardbackground]}>
-            <Pressable
-              style={style.nextBtn}
-              onPress={() => {
-                onboardStatus === 2
-                  ? setOnboardStatus(0)
-                  : setOnboardStatus(onboardStatus + 1);
-              }}
-            />
+            <Pressable style={style.nextBtn} onPress={changeSheets}>
+              <Image source={require('./Arrow.png')} />
+            </Pressable>
           </Animated.View>
         </View>
       </Animated.View>
-    </>
+    </PanGestureHandler>
   );
 };
 
