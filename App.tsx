@@ -13,7 +13,7 @@ const App = () => {
     //   <OnBoardScreen />
     // </View>
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="OnBoardScreen">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="On Board Screen"
           component={OnBoardScreen}
