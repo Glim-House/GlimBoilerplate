@@ -13,9 +13,9 @@ const App = () => {
     //   <OnBoardScreen />
     // </View>
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="OnBoardScreen">
         <Stack.Screen
-          name="On Board Screen"
+          name="OnBoardScreen"
           component={OnBoardScreen}
           options={{headerShown: false}}
         />
