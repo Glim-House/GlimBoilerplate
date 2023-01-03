@@ -2,17 +2,18 @@ import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React, {useState} from 'react';
 import {style} from './Onboard.style';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
-
+import {navigate} from '../../navigation/useNavigationUtils';
+import {IllUstrationOne, IllUstrationThree, IllUstrationTwo} from './asset';
 const OnboardScreen = () => {
   const [onboardStatus, setOnboardStatus] = useState<number>(0);
 
   /**
    * Image url's to be rendered on the screen
    */
-  const data: {imgUrl: string}[] = [
-    {imgUrl: require('./asset/onboardImageOne.png')},
-    {imgUrl: require('./asset/onboardImageTwo.png')},
-    {imgUrl: require('./asset/onboardImageThree.png')},
+  const data: {imgUrl: any}[] = [
+    {imgUrl: <IllUstrationOne />},
+    {imgUrl: <IllUstrationTwo />},
+    {imgUrl: <IllUstrationThree />},
   ];
 
   /**
@@ -20,7 +21,7 @@ const OnboardScreen = () => {
    */
   const changeOnboardStatus = () => {
     if (onboardStatus === 2) {
-      setOnboardStatus(0);
+      navigate('Drawer');
     } else {
       setOnboardStatus(onboardStatus + 1);
     }
@@ -38,13 +39,15 @@ const OnboardScreen = () => {
     <SafeAreaView>
       <View style={style.container}>
         <View style={style.skipArea}>
-          <Text style={style.skipButton} onPress={() => {}}>
+          <Text
+            style={style.skipButton}
+            onPress={() => {
+              navigate('Drawer');
+            }}>
             Skip
           </Text>
         </View>
-        <View style={style.imageArea}>
-          <Image source={data[onboardStatus].imgUrl} />
-        </View>
+        <View style={style.imageArea}>{data[onboardStatus].imgUrl}</View>
         <View style={style.descArea}>
           <Text style={style.heading}>
             Track your mood and reflect on your day
