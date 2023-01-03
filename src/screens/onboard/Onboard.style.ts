@@ -1,52 +1,72 @@
-import {Dimensions, StatusBar, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 
-const {width, height} = Dimensions.get('window');
 export const style = StyleSheet.create({
+  // Layout Styles
   container: {
-    height: height,
-    width: width,
-    // marginTop: StatusBar.currentHeight,
+    height: '100%',
+    width: '100%',
   },
-  card: {
-    backgroundColor: '#fff',
-    position: 'absolute',
-    bottom: 80,
-    width: width - 64,
-    height: height / 3,
-    alignSelf: 'center',
-    borderRadius: 50,
-    padding: 32,
+  skipArea: {
+    height: '5%',
+    justifyContent: 'center',
+    paddingHorizontal: 30,
   },
-  nextBtn: {
-    backgroundColor: '#000',
-    width: 62,
-    height: 62,
-    borderRadius: 100,
-    marginBottom: -20,
-  },
-  heading: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: '600',
-    marginTop: 10,
-  },
-  desc: {
-    fontSize: 14,
-    textAlign: 'center',
-    marginTop: 12,
-    lineHeight: 20,
-    opacity: 0.6,
-  },
-  btnBox: {
-    width: 88,
-    height: 70,
-    position: 'absolute',
-    bottom: 0,
+  imageArea: {
+    height: '55%',
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
-    borderTopRightRadius: 80,
-    borderTopLeftRadius: 80,
-    // backgroundColor: 'red',
+  },
+  descArea: {
+    height: '20%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 30,
+  },
+  navigationArea: {
+    height: '20%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 30,
+  },
+  // Component styles
+  skipButton: {
+    textAlign: 'right',
+    fontSize: 14,
+  },
+  nextButton: {
+    backgroundColor: '#26c88d',
+    width: 62,
+    height: 62,
+    borderRadius: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  heading: {
+    fontSize: 24,
+    textAlign: 'center',
+    lineHeight: 30,
+    color: '#607da0',
+  },
+  desc: {
+    textAlign: 'center',
+    marginTop: 8,
+    lineHeight: 20,
+    fontSize: 14,
+    color: '#b2c1cc',
+  },
+  progressTrack: {
+    height: 4,
+    width: 57,
+    backgroundColor: '#26c88d50',
+    borderRadius: 50,
+    position: 'relative',
+  },
+  progressThumb: {
+    backgroundColor: '#26c88d',
+    height: 4,
+    width: 19,
+    borderRadius: 50,
+    position: 'absolute',
   },
 });
