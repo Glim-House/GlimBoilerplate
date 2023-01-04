@@ -4,7 +4,18 @@ import {style} from './Onboard.style';
 import Animated, {useAnimatedStyle, withTiming} from 'react-native-reanimated';
 import {navigate} from '../../navigation/useNavigationUtils';
 import {IllUstrationOne, IllUstrationThree, IllUstrationTwo} from './asset';
+import {routeEnum} from '../../enums/route.enum';
+import {useDispatch, useSelector} from 'react-redux';
+import {counterSlice} from '../../redux/slices/counter.slice';
+import {RootState} from '../../redux/store/root.reducer';
+
 const OnboardScreen = () => {
+  // Just for a demo should be removed
+  const dispatch = useDispatch();
+  const {count} = useSelector((State: RootState) => State.counter);
+  console.log(count);
+  // // // / //
+
   const [onboardStatus, setOnboardStatus] = useState<number>(0);
 
   /**
@@ -21,10 +32,11 @@ const OnboardScreen = () => {
    */
   const changeOnboardStatus = () => {
     if (onboardStatus === 2) {
-      navigate('Drawer');
+      navigate(routeEnum.DRAWER);
     } else {
       setOnboardStatus(onboardStatus + 1);
     }
+    dispatch(counterSlice.actions.increment());
   };
 
   /**
@@ -42,7 +54,7 @@ const OnboardScreen = () => {
           <Text
             style={style.skipButton}
             onPress={() => {
-              navigate('Drawer');
+              navigate(routeEnum.DRAWER);
             }}>
             Skip
           </Text>
