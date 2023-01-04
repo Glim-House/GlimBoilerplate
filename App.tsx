@@ -1,14 +1,17 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 import RootNavigation from './src/navigation/RootNavigation';
+import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-import {store} from './src/redux/store/store';
+import {store, persistor} from './src/redux/store/store';
 
 const App = () => {
   return (
     <>
       <Provider store={store}>
-        <RootNavigation />
+        <PersistGate loading={null} persistor={persistor}>
+          <RootNavigation />
+        </PersistGate>
       </Provider>
     </>
   );
