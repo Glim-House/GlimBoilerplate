@@ -2,12 +2,13 @@ import createSagaMiddleware from '@redux-saga/core';
 import {applyMiddleware, legacy_createStore as createStore} from 'redux';
 import {rootReducer} from './root.reducer';
 import {rootSaga} from './root.saga';
-import {MMKVLoader} from 'react-native-mmkv-storage';
+// import {MMKVLoader} from 'AsyncStorageAsyncStorage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {getDefaultMiddleware} from '@reduxjs/toolkit';
 import logger from 'redux-logger';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storage = new MMKVLoader().initialize();
+const storage = AsyncStorage;
 const sagaMiddleWare = createSagaMiddleware();
 const middleware = [
   sagaMiddleWare,
