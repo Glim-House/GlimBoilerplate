@@ -8,7 +8,9 @@ const {presets} = require(`${appDirectory}/babel.config.js`);
 
 const compileNodeModules = [
   // Add every react-native package that needs compiling
+  'react-native-mmkv-storage',
   'react-native-gesture-handler',
+  'react-native-reanimated',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 
 const babelLoaderConfiguration = {
@@ -83,6 +85,8 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
     }),
+    new webpack.EnvironmentPlugin({JEST_WORKER_ID: null}),
+    new webpack.DefinePlugin({process: {env: {}}}),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       __DEV__: JSON.stringify(true),
